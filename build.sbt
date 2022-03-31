@@ -4,6 +4,6 @@ ThisBuild / scalaVersion := "3.1.1"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "pps-20-21-lab05",
+    name := "pps-code-lab-5",
     libraryDependencies += "com.github.sbt" % "junit-interface" % "0.13.3" % Test
   )
