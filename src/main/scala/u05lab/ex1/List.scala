@@ -68,17 +68,26 @@ enum List[A]:
   def partition(pred: A => Boolean): (List[A], List[A]) =
     (this.filter(pred), this.filter(el => !pred(el)))
 
+  /*
   def span(pred: A => Boolean): (List[A], List[A]) =
     def getFirstList(el: List[A]): List[A] = el match
       case h :: t if pred(h) => h :: getFirstList(t)
       case _ => Nil()
-    (getFirstList(this), )
+    (getFirstList(this), )*/
 
 
   /** @throws UnsupportedOperationException if the list is empty */
-  def reduce(op: (A, A) => A): A = ???
+  def reduce(op: (A, A) => A): A =
+    if(!this.isEmpty) then
+      this.tail.get.foldLeft(this.head.get)(op)
+    else
+      throw UnsupportedOperationException()
 
-  def takeRight(n: Int): List[A] = ???*/
+  def takeRight(n: Int): List[A] = this match
+    case _ :: t if (length > n) => t.takeRight(n)
+    case h :: t => h :: t
+    case _ => Nil()
+
 
 // Factories
 object List:
@@ -96,12 +105,14 @@ object List:
   println(reference.zipRight) // List((1, 0), (2, 1), (3, 2), (4, 3))
 
   println(reference.partition(_ % 2 == 0)) // (List(2, 4), List(1, 3))
-
-  println(reference.span(_ % 2 != 0)) // (List(1), List(2, 3, 4))
   /*
+  println(reference.span(_ % 2 != 0)) // (List(1), List(2, 3, 4))
   println(reference.span(_ < 3)) // (List(1, 2), List(3, 4))
+  */
+
   println(reference.reduce(_ + _)) // 10
   try Nil.reduce[Int](_ + _)
   catch case ex: Exception => println(ex) // prints exception
   println(List(10).reduce(_ + _)) // 10
-  println(reference.takeRight(3)) // List(2, 3, 4)*/
+
+  println(reference.takeRight(3)) // List(2, 3, 4)
