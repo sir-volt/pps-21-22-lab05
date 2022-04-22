@@ -25,7 +25,8 @@ class ListTest {
   @Test
   def testSpan(): Unit =
     assertEquals((List(1), List(2, 3, 4)), el3.span(_ % 2 != 0))
-    
+    assertEquals((List(10, 20, 30, 40),Nil()), elements.span(_ % 10 == 0))
+    assertEquals((List(5, 7), List(9, 12)), el2.span(_ % 3 != 0))
 
 
   @Test
