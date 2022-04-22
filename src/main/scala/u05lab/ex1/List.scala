@@ -68,12 +68,11 @@ enum List[A]:
   def partition(pred: A => Boolean): (List[A], List[A]) =
     (this.filter(pred), this.filter(el => !pred(el)))
 
-  /*
   def span(pred: A => Boolean): (List[A], List[A]) =
     def getFirstList(el: List[A]): List[A] = el match
       case h :: t if pred(h) => h :: getFirstList(t)
       case _ => Nil()
-    (getFirstList(this), )*/
+    (getFirstList(this), this.takeRight(this.length - getFirstList(this).length))
 
 
   /** @throws UnsupportedOperationException if the list is empty */
