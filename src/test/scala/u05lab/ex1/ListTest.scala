@@ -30,14 +30,21 @@ class ListTest {
 
   @Test
   def testReduce(): Unit =
+    //val except: Exception = Nil().reduce(_ + _)
     assertEquals(100, elements.reduce(_ + _))
     assertEquals(24, el3.reduce(_ * _))
     assertEquals(-23, el2.reduce(_ - _))
+    //assertThrows(classOf[UnsupportedOperationException], () => Nil().reduce(_ + _))
 
   @Test
   def testTakeRight(): Unit =
     assertEquals(List(30, 40), elements.takeRight(2))
     assertEquals(Nil(), el3.takeRight(0))
     assertEquals(List(5, 7, 9, 12), el2.takeRight(4))
+
+  @Test
+  def testCollect(): Unit =
+    assertEquals(List(7, 9, 12), el2.collect {case x if x > 5 => x})
+    assertEquals(List(1, 2, 3, 4), elements.collect {case x if x % 10 == 0 => x / 10})
 
 }
