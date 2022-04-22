@@ -88,6 +88,14 @@ enum List[A]:
     case h :: t => h :: t
     case _ => Nil()
 
+  def collect[B](function: PartialFunction[A, B]): List[B] =
+    this.filter(el => function.isDefinedAt(el)).map(x => function(x))
+    /* VECCHIA VERSIONE
+    this match
+    case h :: t if function.isDefinedAt(h) => function(h) :: t.collect(function)
+    case _ :: t => t.collect(function)
+    case _ => Nil()*/
+
 
 // Factories
 object List:
