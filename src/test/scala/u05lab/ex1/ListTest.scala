@@ -22,19 +22,17 @@ class ListTest {
     assertNotEquals((List(10, 20), List(30, 40)), elements.partition(_ % 10 == 0))
     assertEquals((List(10, 20, 30, 40), Nil()), elements.partition(_ % 2 == 0))
 
-  /*
   @Test
   def testSpan(): Unit =
     assertEquals((List(1), List(2, 3, 4)), el3.span(_ % 2 != 0))
-  */
+    
+
 
   @Test
   def testReduce(): Unit =
-    //val except: Exception = Nil().reduce(_ + _)
     assertEquals(100, elements.reduce(_ + _))
     assertEquals(24, el3.reduce(_ * _))
     assertEquals(-23, el2.reduce(_ - _))
-    //assertThrows(classOf[UnsupportedOperationException], () => Nil().reduce(_ + _))
 
   @Test
   def testTakeRight(): Unit =
