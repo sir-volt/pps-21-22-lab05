@@ -25,7 +25,7 @@ object ConferenceReviewing:
   private var reviews: List[(Int, Map[Question, Int])] = List.empty
 
   def loadReview(article: Int, scores: Map[Question, Int]): Unit =
-    if(scores.size < Question.values.length) then
+    if(scores.keys.size < Question.values.length) then
       throw IllegalArgumentException()
     else
       reviews = reviews :+ (article, scores)
@@ -37,6 +37,22 @@ object ConferenceReviewing:
 
   def orderedScores(article: Int, question: Question): List[Int] =
     reviews.filter(art => art._1 == article).map(art => art._2.get(question).get).sorted
+
+  def averageFinalScore(article: Int): Double =
+    var els = reviews.filter(art => art._1 == article)
+    var nEls = els.size
+    els.map(art => art._2.get(Question.FINAL).get).foldRight(0.0)(_ + _) / nEls
+
+  def acceptedArticles(): Set[Int] =
+    reviews.filter(el => averageFinalScore(el._1) > 5).filter(el => el._2.get(Question.RELEVANCE).get >= 8)
+      .map(art => art._1).toSet
+
+  def sortedAcceptedArticles(): List[(Int, Double)] =
+    var articles: List[(Int, Double)] = List.empty
+    acceptedArticles().foreach(el => articles = articles :+ (el, averageFinalScore(el)))
+    articles.sorted.reverse
+
+
 
 
 
