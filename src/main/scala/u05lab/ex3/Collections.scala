@@ -31,6 +31,7 @@ object PerformanceUtils:
   println(5 :: immutList)
   println(immutList :+ 12)
   println((immutList :+ 12).sorted)
+  println(immutList.count(_ > 0))
 
   val mutList = ListBuffer[String]()
   println(mutList)
