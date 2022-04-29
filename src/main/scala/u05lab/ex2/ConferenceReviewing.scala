@@ -17,7 +17,7 @@ trait ConferenceReviewing:
   def sortedAcceptedArticle(): List[(Int, Double)]
 */
 
-object ConferenceReviewing:
+class ConferenceReviewing:
   /*
   def apply: ConferenceReviewing
     ConferenceReviewingImpl()
@@ -51,6 +51,10 @@ object ConferenceReviewing:
     var articles: List[(Int, Double)] = List.empty
     acceptedArticles().foreach(el => articles = articles :+ (el, averageFinalScore(el)))
     articles.sorted.reverse
+
+object ConferenceReviewing:
+  def apply(): ConferenceReviewing =
+    new ConferenceReviewing()
 
 
 
