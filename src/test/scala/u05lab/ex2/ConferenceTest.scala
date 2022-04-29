@@ -10,7 +10,7 @@ class ConferenceTest {
 
   var randomMap: Map[Question, Int] = Map(Question.RELEVANCE -> 8, Question.SIGNIFICANCE -> 8,
     Question.CONFIDENCE -> 7, Question.FINAL -> 8)
-  var conf = ConferenceReviewing
+  var conf = ConferenceReviewing()
 
   conf.loadReview(1, 8, 8, 6, 8)
   conf.loadReview(1, 9, 9, 6, 9)
